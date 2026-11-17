@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 import sqlite3
 from flask import Flask, jsonify, render_template, request
 
@@ -79,12 +80,10 @@ def book_slot():
       except sqlite3.IntegrityError:
         continue
 
-  return jsonify(
-      {
-          "success": False,
-          "error": "Sorry, that slot was just taken. Pick another.",
-      }
-  ), 409
+  return jsonify({
+      "success": False,
+      "error": "Sorry, that slot was just taken. Pick another.",
+  }), 409
 
 
 @app.route("/api/bookings", methods=["GET"])
